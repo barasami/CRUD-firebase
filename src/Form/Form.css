@@ -1,0 +1,55 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: sans-serif;
+   
+}
+.heading{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: .1em;
+    color: seagreen;
+}
+.myform{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.form{
+    margin-left: 10%;
+    margin-right: 10%;
+    align-items: center;
+    justify-content: center;
+}
+.coolform{
+    margin-top: 10%;
+    margin-bottom: 10%;
+    position: fixed;
+}
+.input{
+    padding: .3em;
+}
+.date{
+    padding: .3em;
+}
+.submit{
+    padding: .3em;
+}
+.text{
+    padding: .3em;
+    justify-content: stretch;
+    width: 100%;
+}
+.btn{
+    padding: .3em;
+    justify-content: stretch;
+    width: 100%;
+}
+.mydate{
+    padding: .3em;
+    justify-content: stretch;
+    width: 100%;
+}
