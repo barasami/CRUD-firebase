@@ -17,10 +17,12 @@
     align-items: center;
     justify-content: center;
     height: 100vh;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 .form{
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: auto;
+    margin-right: auto;
     align-items: center;
     justify-content: center;
 }
@@ -39,17 +41,24 @@
     padding: .3em;
 }
 .text{
-    padding: .3em;
+    padding: .4em;
     justify-content: stretch;
     width: 100%;
+    border: 1px solid seagreen;
 }
 .btn{
-    padding: .3em;
+    padding: .5em;
     justify-content: stretch;
     width: 100%;
+    background-color: seagreen;
+    border: none;
+    border-radius: 2px;
+    color: white;
 }
 .mydate{
-    padding: .3em;
+    padding: .4em;
     justify-content: stretch;
     width: 100%;
+    border: 1px solid seagreen;
+
 }
