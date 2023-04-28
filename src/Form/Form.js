@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import './Form.css'
 import { mydb } from '../Fbase/Fbase'
-import {getDocs,collection}from "firebase/firestore"
+import {getDocs,collection,addDoc}from "firebase/firestore"
 import DeleteIcon from '@mui/icons-material/Delete';
 
 function Form() {
@@ -13,29 +13,50 @@ function Form() {
 
     const mycollectionRef=collection(mydb,'Todo')
 
-    useEffect(()=>{
-        const getTodos=async()=>{
+    const getTodos=async()=>{
             
-            try{
-                const data=await getDocs(mycollectionRef);
-                const myallData=data.docs.map((doc)=>({
-                    ...doc.data(),id:doc.id
-                }))
-                console.log(myallData);
-            }
-            catch(eror){
-                console.log(eror);
-            };
+        try{
+            const data=await getDocs(mycollectionRef);
+            const myallData=data.docs.map((doc)=>({
+                ...doc.data(),id:doc.id
+            }))
+            setmyTodo(myallData);
         }
-        
+        catch(eror){
+            console.log(eror);
+        };
+    }
+
+    useEffect(()=>{
         getTodos()
     },[])
+
+    const mycoolTodo=mytodo?.map((todos)=>{
+        return(
+            <div key={todos.id} className='myresults'>
+                <table>
+                    <td>{todos.Date}</td>
+                    <td>{todos.Title}</td>
+                    <td>{todos.Todo}</td>
+                </table>
+            </div>
+        )
+
+    })
     
-    const submitMe=(e)=>{
+    const submitMe=async(e)=>{
         e.preventDefault()
-        console.log(mytext);
-        console.log(title);
-        console.log(date);
+       try{
+        await addDoc(mycollectionRef,{
+            Date:date,
+            Title:title,
+            Todo:mytext
+        })
+        getTodos()
+       }
+       catch (err){
+        console.log(err);
+       }
     }
 
   return (
@@ -60,6 +81,10 @@ function Form() {
                 </div>
 
             </form>
+
+           <div>
+                {mycoolTodo}
+           </div>
             
         </div>
 
