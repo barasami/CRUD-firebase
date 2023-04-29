@@ -5,6 +5,7 @@ import { mydb } from '../Fbase/Fbase'
 import {getDocs,collection,addDoc,deleteDoc,doc}from "firebase/firestore"
 import DeleteIcon from '@mui/icons-material/Delete';
 import CircularProgress from '@mui/material/CircularProgress';
+import EditIcon from '@mui/icons-material/Edit';
 
 function Form() {
     const[mytodo,setmyTodo]=useState([])
@@ -33,6 +34,7 @@ function Form() {
         try{
             const myref=doc(mydb,'Todo',id)
             await deleteDoc(myref)
+            getTodos()
         }
         catch (err){
             console.log(err);
@@ -48,13 +50,14 @@ function Form() {
     const mycoolTodo=mytodo?.map((todos)=>{
         return(
             <div key={todos.id} className='myresults'>
-                <table>
-                    <td className='data'>{todos.Date}</td>
-                    <td className='data'>{todos.Title}</td>
-                    <td className='data'>{todos.Todo}</td>
-                    <td className='data'><DeleteIcon color='error' onClick={()=>deletedMe(todos.id)}/></td>
+                <div className='details'>
+                    <div className='dates'>{todos.Date}</div>
+                    <div className='mytitle'>{todos.Title}</div>
+                    <div className='mytodo'>{todos.Todo}</div>
+                    <div className='delete'><DeleteIcon color='error' fontSize='small' onClick={()=>deletedMe(todos.id)}/></div>
+                    <div className='edit'><EditIcon fontSize='small' color='success'/></div>
                     
-                </table>
+                </div>
             </div>
         )
 
