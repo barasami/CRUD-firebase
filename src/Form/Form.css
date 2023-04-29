@@ -61,37 +61,39 @@
 
 }
 .edit{
-    padding: .1em;
-    border: 1px solid gray;
-    margin: .2em;
+   padding: .2em; 
+    
     
 }
 .delete{
-    padding: .1em;
-    border: 1px solid gray;
-    margin: .2em;
+   padding: .2em; 
+    
 }
 .mytodo{
     padding: .2em;
-    border: 1px solid gray;
-    margin: .2em;
+    margin-right: 1em; 
+   
     
 }
 .mytitle{
     padding: .2em;
-    border: 1px solid gray;
-    margin: .2em;
+  
     
 }
 .dates{
-    padding: .2em;
-    border: 1px solid gray;
-    margin: .2em;
+   padding: .2em;
+   margin-right: 1em; 
+    
 }
 .details{
+ display: flex;
+}
+.myresults{
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    padding: .2em;
+    justify-content:space-evenly;
+    background-color: #c0bfbf;
+    
 }
+   
 

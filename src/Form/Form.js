@@ -45,6 +45,7 @@ function Form() {
         setload(true)
         getTodos();
         setload(false)
+        //eslint-disable-next-line
     },[])
 
     const mycoolTodo=mytodo?.map((todos)=>{
@@ -88,7 +89,7 @@ function Form() {
                     placeholder='Todo Title ...' onChange={(e)=>setTitle(e.target.value)}/>
                 </div>
                 <div className='input'>
-                    <input type='text' className='text' required 
+                    <textarea  className='text' required rows={8} cols={53}
                     placeholder='Your Todo...' onChange={(e)=>setText(e.target.value)}/>
                 </div>
                 <div className='date'>
