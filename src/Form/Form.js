@@ -2,14 +2,16 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import './Form.css'
 import { mydb } from '../Fbase/Fbase'
-import {getDocs,collection,addDoc}from "firebase/firestore"
+import {getDocs,collection,addDoc,deleteDoc,doc}from "firebase/firestore"
 import DeleteIcon from '@mui/icons-material/Delete';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function Form() {
     const[mytodo,setmyTodo]=useState([])
     const[mytext,setText]=useState('')
     const[title,setTitle]=useState(' ')
     const[date,setDate]=useState(' ')
+    const[load,setload]=useState(false)
 
     const mycollectionRef=collection(mydb,'Todo')
 
@@ -27,17 +29,31 @@ function Form() {
         };
     }
 
+    const deletedMe=async(id)=>{
+        try{
+            const myref=doc(mydb,'Todo',id)
+            await deleteDoc(myref)
+        }
+        catch (err){
+            console.log(err);
+        }
+    }
+
     useEffect(()=>{
-        getTodos()
+        setload(true)
+        getTodos();
+        setload(false)
     },[])
 
     const mycoolTodo=mytodo?.map((todos)=>{
         return(
             <div key={todos.id} className='myresults'>
                 <table>
-                    <td>{todos.Date}</td>
-                    <td>{todos.Title}</td>
-                    <td>{todos.Todo}</td>
+                    <td className='data'>{todos.Date}</td>
+                    <td className='data'>{todos.Title}</td>
+                    <td className='data'>{todos.Todo}</td>
+                    <td className='data'><DeleteIcon color='error' onClick={()=>deletedMe(todos.id)}/></td>
+                    
                 </table>
             </div>
         )
@@ -83,7 +99,11 @@ function Form() {
             </form>
 
            <div>
-                {mycoolTodo}
+                {load ? <CircularProgress/> : 
+                    <div> 
+                        {mycoolTodo}
+                    </div>
+                }
            </div>
             
         </div>
