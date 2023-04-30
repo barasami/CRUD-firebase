@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import './Form.css'
 import { mydb } from '../Fbase/Fbase'
-import {getDocs,collection,addDoc,deleteDoc,doc}from "firebase/firestore"
+import {getDocs,collection,addDoc,deleteDoc,doc,updateDoc}from "firebase/firestore"
 import DeleteIcon from '@mui/icons-material/Delete';
 import CircularProgress from '@mui/material/CircularProgress';
 import EditIcon from '@mui/icons-material/Edit';
@@ -40,6 +40,18 @@ function Form() {
             console.log(err);
         }
     }
+    const updateMe=async(id)=>{
+        try{
+            const myref=doc(mydb,'Todo',id)
+            await updateDoc(myref,{
+                
+            })
+            getTodos()
+        }
+        catch (err){
+            console.log(err);
+        }
+    }
 
     useEffect(()=>{
         setload(true)
@@ -56,7 +68,7 @@ function Form() {
                     <div className='mytitle'>{todos.Title}</div>
                     <div className='mytodo'>{todos.Todo}</div>
                     <div className='delete'><DeleteIcon color='error' fontSize='small' onClick={()=>deletedMe(todos.id)}/></div>
-                    <div className='edit'><EditIcon fontSize='small' color='success'/></div>
+                    <div className='edit'><EditIcon fontSize='small' color='success' onClick={()=>updateMe(todos.id)}/></div>
                     
                 </div>
             </div>
