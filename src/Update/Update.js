@@ -1,14 +1,10 @@
-import React, { useState } from 'react'
 import './Update.css'
 
-function Update() {
-    const[title,updateTitle]=useState('')   
-    const[date,updateDate]=useState('')
-    const[todo,updateTodo]=useState('')
-
+function Update({updateTitle,updateDate,updateTodo}) {
     const submitMe=async(e)=>{
         e.preventDefault()
-    }
+    } 
+    
   return (
     <div className='myform'>
         <div className='coolform'>
@@ -27,7 +23,7 @@ function Update() {
                     placeholder='Your Todo...' onChange={(e)=>updateTodo(e.target.value)}/>
                 </div>
                 <div className='submit'>
-                    <button className='btn'>Update</button>
+                    <button className='btn' >Update</button>
                 </div>
 
             </form>

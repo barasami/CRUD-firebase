@@ -7,12 +7,14 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CircularProgress from '@mui/material/CircularProgress';
 import EditIcon from '@mui/icons-material/Edit';
 
-function Form() {
+
+function Form({titless,datess,todoss}) {
     const[mytodo,setmyTodo]=useState([])
     const[mytext,setText]=useState('')
     const[title,setTitle]=useState(' ')
     const[date,setDate]=useState(' ')
     const[load,setload]=useState(false)
+    
 
     const mycollectionRef=collection(mydb,'Todo')
 
@@ -44,7 +46,10 @@ function Form() {
         try{
             const myref=doc(mydb,'Todo',id)
             await updateDoc(myref,{
-                
+                Date: datess,
+                Title:titless ,
+                Todo: todoss
+
             })
             getTodos()
         }
@@ -92,6 +97,7 @@ function Form() {
     }
 
   return (
+    <>
     <div className='myform'>
         <div className='coolform'>
             <h3 className='heading'>My Todo</h3>
@@ -125,6 +131,7 @@ function Form() {
         </div>
 
     </div>
+    </>
   )
 }
 
