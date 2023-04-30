@@ -71,12 +71,17 @@
 }
 .mytodo{
     padding: .2em;
-    margin-right: 1em; 
+    margin-right: 1em;
+    font-weight: lighter;
+    text-transform: capitalize;
+    font-family: cursive;
    
     
 }
 .mytitle{
     padding: .2em;
+    color: seagreen;
+    text-transform: uppercase;
   
     
 }
@@ -92,7 +97,7 @@
     display: flex;
     align-items: center;
     justify-content:space-evenly;
-    background-color: #c0bfbf;
+    background-color: #eee9e9;
     
 }
    

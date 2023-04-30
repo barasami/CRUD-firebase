@@ -88,13 +88,13 @@ function Form() {
                     <input type='text' className='text' required 
                     placeholder='Todo Title ...' onChange={(e)=>setTitle(e.target.value)}/>
                 </div>
-                <div className='input'>
-                    <textarea  className='text' required rows={8} cols={53}
-                    placeholder='Your Todo...' onChange={(e)=>setText(e.target.value)}/>
-                </div>
                 <div className='date'>
                     <input type='date' className='mydate' 
                     required onChange={(e)=>setDate(e.target.value)}/>
+                </div>
+                <div className='input'>
+                    <textarea  className='text' required rows={8} cols={53}
+                    placeholder='Your Todo...' onChange={(e)=>setText(e.target.value)}/>
                 </div>
                 <div className='submit'>
                     <button className='btn'>Submit</button>
