@@ -15,6 +15,13 @@ function Form() {
     const[date,setDate]=useState(' ')
     const[load,setload]=useState(false)
     const[open, setOpen]=useState(false)
+
+    //update
+
+    const[datess,setDatess]=useState('')
+    const[titless,setTitless]=useState('')
+    const[todoss,setTodoss]=useState('')
+    
    
     
 
@@ -50,9 +57,9 @@ function Form() {
         try{
             const myref=doc(mydb,'Todo',id)
             await updateDoc(myref,{
-                // Date: datess,
-                // Title:titless ,
-                // Todo: todoss
+                Date: datess,
+                Title:titless ,
+                Todo: todoss
             })
             getTodos()
         }
@@ -88,9 +95,29 @@ function Form() {
 
     const MyEdit=()=>{
         return(
-            <>
-                <p>hello edit</p>
-            </>
+            <div className='myform'>
+                <div className='coolform'>
+                 <h3 className='heading'>Update Todo</h3>
+                    <form onSubmit={submitMe} className='form'>
+                        <div className='input'>
+                            <input type='text' className='text' required 
+                            placeholder='Todo Title ...' onChange={(e)=>setTitless(e.target.value)}/>
+                        </div>
+                        <div className='date'>
+                            <input type='date' className='mydate' 
+                            required onChange={(e)=>setDatess(e.target.value)}/>
+                        </div>
+                        <div className='input'>
+                            <textarea  className='text' required rows={8} cols={53}
+                            placeholder='Your Todo...' onChange={(e)=>setTodoss(e.target.value)}/>
+                        </div>
+                        <div className='submit'>
+                            <button className='btn' onClick={()=>setOpen(false)}>Submit</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
         )
     }
     
