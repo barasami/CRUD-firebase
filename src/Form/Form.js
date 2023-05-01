@@ -9,6 +9,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 
 function Form({titless,datess,todoss}) {
+    console.log(titless);
     const[mytodo,setmyTodo]=useState([])
     const[mytext,setText]=useState('')
     const[title,setTitle]=useState(' ')
