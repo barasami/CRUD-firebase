@@ -87,8 +87,8 @@
 }
 .dates{
    padding: .2em;
-   margin-right: 1em; 
-    
+   margin-right: 1em;
+   text-decoration: underline;    
 }
 .details{
  display: flex;

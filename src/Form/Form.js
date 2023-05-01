@@ -6,15 +6,16 @@ import {getDocs,collection,addDoc,deleteDoc,doc,updateDoc}from "firebase/firesto
 import DeleteIcon from '@mui/icons-material/Delete';
 import CircularProgress from '@mui/material/CircularProgress';
 import EditIcon from '@mui/icons-material/Edit';
+import Update from '../Update/Update'
 
 
-function Form({titless,datess,todoss}) {
-    console.log(titless);
+function Form({titless,datess,todoss,setIsopen,isopen}) {
     const[mytodo,setmyTodo]=useState([])
     const[mytext,setText]=useState('')
     const[title,setTitle]=useState(' ')
     const[date,setDate]=useState(' ')
     const[load,setload]=useState(false)
+   
     
 
     const mycollectionRef=collection(mydb,'Todo')
@@ -34,6 +35,7 @@ function Form({titless,datess,todoss}) {
     }
 
     const deletedMe=async(id)=>{
+        
         try{
             const myref=doc(mydb,'Todo',id)
             await deleteDoc(myref)
@@ -44,13 +46,13 @@ function Form({titless,datess,todoss}) {
         }
     }
     const updateMe=async(id)=>{
+        setIsopen(true)
         try{
             const myref=doc(mydb,'Todo',id)
             await updateDoc(myref,{
                 Date: datess,
                 Title:titless ,
                 Todo: todoss
-
             })
             getTodos()
         }
@@ -99,6 +101,7 @@ function Form({titless,datess,todoss}) {
 
   return (
     <>
+    {isopen ? <Update/> :
     <div className='myform'>
         <div className='coolform'>
             <h3 className='heading'>My Todo</h3>
@@ -132,6 +135,7 @@ function Form({titless,datess,todoss}) {
         </div>
 
     </div>
+    }
     </>
   )
 }

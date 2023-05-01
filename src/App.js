@@ -7,18 +7,25 @@ function App() {
   const[titles,updateTitle]=useState('')   
   const[dates,updateDate]=useState('')
   const[todos,updateTodo]=useState('')
+  const[isopen,setIsopen]=useState(false)
 
  
   return (
     <div className="App">
-      <Form/>
+      <Form
+      titless={titles}
+      datess={dates}
+      todoss={todos}
+      isopen={isopen}
+      setIsopen={setIsopen}/>
       <Update
       titless={titles}
       updateTitle={updateTitle}
       datess={dates}
       updateDate={updateDate}
       todoss={todos}
-      updateTodo={updateTodo}/>
+      updateTodo={updateTodo}
+      setIsopen={setIsopen}/>
     </div>
   );
 }
