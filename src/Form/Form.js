@@ -6,15 +6,15 @@ import {getDocs,collection,addDoc,deleteDoc,doc,updateDoc}from "firebase/firesto
 import DeleteIcon from '@mui/icons-material/Delete';
 import CircularProgress from '@mui/material/CircularProgress';
 import EditIcon from '@mui/icons-material/Edit';
-import Update from '../Update/Update'
 
 
-function Form({titless,datess,todoss,setIsopen,isopen}) {
+function Form() {
     const[mytodo,setmyTodo]=useState([])
     const[mytext,setText]=useState('')
     const[title,setTitle]=useState(' ')
     const[date,setDate]=useState(' ')
     const[load,setload]=useState(false)
+    const[open, setOpen]=useState(false)
    
     
 
@@ -46,19 +46,21 @@ function Form({titless,datess,todoss,setIsopen,isopen}) {
         }
     }
     const updateMe=async(id)=>{
-        setIsopen(true)
+        setOpen(true)
         try{
             const myref=doc(mydb,'Todo',id)
             await updateDoc(myref,{
-                Date: datess,
-                Title:titless ,
-                Todo: todoss
+                // Date: datess,
+                // Title:titless ,
+                // Todo: todoss
             })
             getTodos()
         }
         catch (err){
             console.log(err);
         }
+
+    
     }
 
     useEffect(()=>{
@@ -83,6 +85,14 @@ function Form({titless,datess,todoss,setIsopen,isopen}) {
         )
 
     })
+
+    const MyEdit=()=>{
+        return(
+            <>
+                <p>hello edit</p>
+            </>
+        )
+    }
     
     const submitMe=async(e)=>{
         e.preventDefault()
@@ -101,7 +111,7 @@ function Form({titless,datess,todoss,setIsopen,isopen}) {
 
   return (
     <>
-    {isopen ? <Update/> :
+    {open ? MyEdit() : 
     <div className='myform'>
         <div className='coolform'>
             <h3 className='heading'>My Todo</h3>
