@@ -85,20 +85,27 @@ function Form() {
                     <div className='mytitle'>{todos.Title}</div>
                     <div className='mytodo'>{todos.Todo}</div>
                     <div className='delete'><DeleteIcon color='error' fontSize='small' onClick={()=>deletedMe(todos.id)}/></div>
-                    <div className='edit'><EditIcon fontSize='small' color='success' onClick={()=>updateMe(todos.id)}/></div>
-                    
+                    <div className='edit'><EditIcon fontSize='small' color='success' onClick={()=>setOpen(true)}/></div>
+                    {/* ()=>updateMe(todos.id) */}
                 </div>
             </div>
         )
 
     })
-
+    const myUpdate=()=>{
+        setOpen(false)
+        updateMe()
+    }
     const MyEdit=()=>{
+        mytodo.map((coolid)=>{
+          let p=coolid.id 
+          console.log(p); 
+        })
         return(
             <div className='myform'>
                 <div className='coolform'>
                  <h3 className='heading'>Update Todo</h3>
-                    <form onSubmit={submitMe} className='form'>
+                    <form onSubmit={updateMe} className='form'>
                         <div className='input'>
                             <input type='text' className='text' required 
                             placeholder='Todo Title ...' onChange={(e)=>setTitless(e.target.value)}/>
@@ -112,7 +119,7 @@ function Form() {
                             placeholder='Your Todo...' onChange={(e)=>setTodoss(e.target.value)}/>
                         </div>
                         <div className='submit'>
-                            <button className='btn' onClick={()=>setOpen(false)}>Submit</button>
+                            <button className='btn' onClick={myUpdate}>Update</button>
                         </div>
 
                     </form>
