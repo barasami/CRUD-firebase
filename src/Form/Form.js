@@ -2,25 +2,24 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import './Form.css'
 import { mydb } from '../Fbase/Fbase'
-import {getDocs,collection,addDoc,deleteDoc,doc,updateDoc}from "firebase/firestore"
+import {getDocs,collection,addDoc,deleteDoc,doc}from "firebase/firestore"
 import DeleteIcon from '@mui/icons-material/Delete';
 import CircularProgress from '@mui/material/CircularProgress';
-import EditIcon from '@mui/icons-material/Edit';
+// import EditIcon from '@mui/icons-material/Edit';
 
 
-function Form({setmyTodo,setText,setTitle,setDate,mytodo,date,title,mytext}) {
+function Form({setmyTodo,setText,setTitle,setDate,mytodo,date,title,mytext,ids}) {
     const[load,setload]=useState(false)
-    const[open, setOpen]=useState(false)
 
     //update
 
-    const[datess,setDatess]=useState('')
-    const[titless,setTitless]=useState('')
-    const[todoss,setTodoss]=useState('')
+    // const[datess,setDatess]=useState('')
+    // const[titless,setTitless]=useState('')
+    // const[todoss,setTodoss]=useState('')
     
-    const editMe=(e)=>{
-        e.preventDefault()
-    }
+    // const editMe=(e)=>{
+    //     e.preventDefault()
+    // }
    
     
 
@@ -40,10 +39,11 @@ function Form({setmyTodo,setText,setTitle,setDate,mytodo,date,title,mytext}) {
         };
     }
 
-    const deletedMe=async(id)=>{
+    const deletedMe=async(ids)=>{
+
         
         try{
-            const myref=doc(mydb,'Todo',id)
+            const myref=doc(mydb,'Todo',ids)
             await deleteDoc(myref)
             getTodos()
         }
@@ -51,52 +51,24 @@ function Form({setmyTodo,setText,setTitle,setDate,mytodo,date,title,mytext}) {
             console.log(err);
         }
     }
-    const updateMe=async(id)=>{
-        setOpen(true)
-        try{
-            const myref=doc(mydb,'Todo',id)
-            await updateDoc(myref,{
-                Date: datess,
-                Title:titless ,
-                Todo: todoss
-            })
-            getTodos()
-        }
-        catch (err){
-            console.log(err);
-        }
+    // const updateMe=async(ids)=>{
+    //     setOpen(true)
+    //     try{
+    //         const myref=doc(mydb,'Todo',ids)
+    //         await updateDoc(myref,{
+    //             Date: datess,
+    //             Title:titless ,
+    //             Todo: todoss
+    //         })
+    //         getTodos()
+    //     }
+    //     catch (err){
+    //         console.log(err);
+    //     }
 
     
-    }
-
-    const allUpdate=()=>{
-        return(
-            <div className='myform'>
-                <div className='coolform'>
-                    <h3 className='heading'>My Todo</h3>
-                    <form onSubmit={editMe} className='form'>
-                        <div className='input'>
-                            <input type='text' className='text' required 
-                            placeholder='Todo Title ...' onChange={(e)=>setTitless(e.target.value)}/>
-                        </div>
-                        <div className='date'>
-                            <input type='date' className='mydate' 
-                            required onChange={(e)=>setDatess(e.target.value)}/>
-                        </div>
-                        <div className='input'>
-                            <textarea  className='text' required rows={8} cols={53}
-                            placeholder='Your Todo...' onChange={(e)=>setTodoss(e.target.value)}/>
-                        </div>
-                        <div className='submit'>
-                            <button className='btn' onClick={()=>setOpen(false)}>Update</button>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        )
-    }
-
+    // }
+   
     useEffect(()=>{
         setload(true)
         getTodos();
@@ -112,7 +84,7 @@ function Form({setmyTodo,setText,setTitle,setDate,mytodo,date,title,mytext}) {
                     <div className='mytitle'>{todos.Title}</div>
                     <div className='mytodo'>{todos.Todo}</div>
                     <div className='delete'><DeleteIcon color='error' fontSize='small' onClick={()=>deletedMe(todos.id)}/></div>
-                    <div className='edit'><EditIcon fontSize='small' color='success' onClick={()=>updateMe(todos.id)}/></div>
+                    {/* <div className='edit'><EditIcon fontSize='small' color='success' onClick={()=>updateMe(todos.id)}/></div> */}
                 </div>
             </div>
         )
@@ -137,7 +109,6 @@ function Form({setmyTodo,setText,setTitle,setDate,mytodo,date,title,mytext}) {
 
   return (
     <> 
-    { open ? allUpdate() :
     <div className='myform'>
         <div className='coolform'>
             <h3 className='heading'>My Todo</h3>
@@ -171,7 +142,6 @@ function Form({setmyTodo,setText,setTitle,setDate,mytodo,date,title,mytext}) {
         </div>
 
     </div>
-    }
     </>
   )
 }

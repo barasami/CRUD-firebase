@@ -8,7 +8,11 @@ function App() {
   const[title,setTitle]=useState(' ')
   const[date,setDate]=useState(' ')
   
+  let ids=mytodo.map((todo)=>{
+    return todo.id
+  })
 
+  
   
  
   return (
@@ -21,7 +25,8 @@ function App() {
       title={title}
       setTitle={setTitle}
       date={date}
-      setDate={setDate}/>
+      setDate={setDate}
+      ids={ids}/>
     </div>
   );
 }
