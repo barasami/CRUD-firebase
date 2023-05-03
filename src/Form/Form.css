@@ -88,8 +88,9 @@
 }
 .dates{
    padding: .2em;
-   margin-right: 1em;
-   text-decoration: underline;    
+   margin-right: .8em;
+   text-decoration: underline; 
+   color: goldenrod;   
 }
 .details{
  display: flex;

@@ -8,11 +8,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import EditIcon from '@mui/icons-material/Edit';
 
 
-function Form() {
-    const[mytodo,setmyTodo]=useState([])
-    const[mytext,setText]=useState('')
-    const[title,setTitle]=useState(' ')
-    const[date,setDate]=useState(' ')
+function Form({setmyTodo,title,date,mytext,mytodo,setDate,setTitle,setText}) {
     const[load,setload]=useState(false)
     const[open, setOpen]=useState(false)
 
@@ -22,6 +18,9 @@ function Form() {
     const[titless,setTitless]=useState('')
     const[todoss,setTodoss]=useState('')
     
+    const editMe=(e)=>{
+        e.preventDefault()
+    }
    
     
 
@@ -70,6 +69,34 @@ function Form() {
     
     }
 
+    const allUpdate=()=>{
+        return(
+            <div className='myform'>
+                <div className='coolform'>
+                    <h3 className='heading'>Update Todo</h3>
+                    <form onSubmit={editMe} className='form'>
+                        <div className='input'>
+                            <input type='text' className='text' required 
+                            placeholder='Todo Title ...' onChange={(e)=>setTitless(e.target.value)}/>
+                        </div>
+                        <div className='date'>
+                            <input type='date' className='mydate' 
+                            required onChange={(e)=>setDatess(e.target.value)}/>
+                        </div>
+                        <div className='input'>
+                            <textarea  className='text' required rows={8} cols={53}
+                            placeholder='Your Todo...' onChange={(e)=>setTodoss(e.target.value)}/>
+                        </div>
+                        <div className='submit'>
+                            <button className='btn' onClick={()=>setOpen(false)}>Update</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        )
+    }
+
     useEffect(()=>{
         setload(true)
         getTodos();
@@ -85,49 +112,14 @@ function Form() {
                     <div className='mytitle'>{todos.Title}</div>
                     <div className='mytodo'>{todos.Todo}</div>
                     <div className='delete'><DeleteIcon color='error' fontSize='small' onClick={()=>deletedMe(todos.id)}/></div>
-                    <div className='edit'><EditIcon fontSize='small' color='success' onClick={()=>setOpen(true)}/></div>
-                    {/* ()=>updateMe(todos.id) */}
+                    <div className='edit'><EditIcon fontSize='small' color='success' onClick={()=>updateMe(todos.id)}/></div>
                 </div>
             </div>
         )
 
     })
-    const myUpdate=()=>{
-        setOpen(false)
-        updateMe()
-    }
-    const MyEdit=()=>{
-        mytodo.map((coolid)=>{
-          let p=coolid.id 
-          console.log(p); 
-        })
-        return(
-            <div className='myform'>
-                <div className='coolform'>
-                 <h3 className='heading'>Update Todo</h3>
-                    <form onSubmit={updateMe} className='form'>
-                        <div className='input'>
-                            <input type='text' className='text' required 
-                            placeholder='Todo Title ...' onChange={(e)=>setTitless(e.target.value)}/>
-                        </div>
-                        <div className='date'>
-                            <input type='date' className='mydate' 
-                            required onChange={(e)=>setDatess(e.target.value)}/>
-                        </div>
-                        <div className='input'>
-                            <textarea  className='text' required rows={8} cols={53}
-                            placeholder='Your Todo...' onChange={(e)=>setTodoss(e.target.value)}/>
-                        </div>
-                        <div className='submit'>
-                            <button className='btn' onClick={myUpdate}>Update</button>
-                        </div>
-
-                    </form>
-                </div>
-            </div>
-        )
-    }
     
+   
     const submitMe=async(e)=>{
         e.preventDefault()
        try{
@@ -144,8 +136,8 @@ function Form() {
     }
 
   return (
-    <>
-    {open ? MyEdit() : 
+    <> 
+    { open ? allUpdate() :
     <div className='myform'>
         <div className='coolform'>
             <h3 className='heading'>My Todo</h3>
