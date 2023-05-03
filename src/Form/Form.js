@@ -8,7 +8,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 import EditIcon from '@mui/icons-material/Edit';
 
 
-function Form({setmyTodo,title,date,mytext,mytodo,setDate,setTitle,setText}) {
+function Form({setmyTodo,setText,setTitle,setDate,mytodo,date,title,mytext}) {
     const[load,setload]=useState(false)
     const[open, setOpen]=useState(false)
 
@@ -73,7 +73,7 @@ function Form({setmyTodo,title,date,mytext,mytodo,setDate,setTitle,setText}) {
         return(
             <div className='myform'>
                 <div className='coolform'>
-                    <h3 className='heading'>Update Todo</h3>
+                    <h3 className='heading'>My Todo</h3>
                     <form onSubmit={editMe} className='form'>
                         <div className='input'>
                             <input type='text' className='text' required 
